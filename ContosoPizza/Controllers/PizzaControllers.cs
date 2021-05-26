@@ -64,10 +64,18 @@ namespace ContosoPizza.Controllers
         }
 
         // DELETE action
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Pizza pizza)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             // This code will update the pizza and return a result
+            var pizza = PizzaService.Get(id);
+
+            if (pizza is null)
+                return NotFound();
+
+            PizzaService.Delete(id);
+
+            return NoContent();
         }
 
     }
